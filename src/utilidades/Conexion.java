@@ -57,7 +57,7 @@ public class Conexion {
 				resultado.add(libro);
 
 			}
-			return resultado;
+			//return resultado;  //posible linea duplicada por error, se ha comentado
 
 		} catch (SQLException e) {
 			System.out.println("Error leyendo libros -> " + e.getMessage());
