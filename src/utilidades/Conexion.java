@@ -44,8 +44,8 @@ public class Conexion {
 			Statement stmt = conexion.createStatement();
 			ResultSet rS = stmt.executeQuery(sql);
 			
-			if (!rS.first()) // no hay registros
-				return null;
+			/*if (!rS.first()) // no hay registros
+				return null;*/
 
 			while (rS.next()) {
 				Libro libro = new Libro();
