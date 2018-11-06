@@ -37,11 +37,15 @@ public class Conexion {
 	public static ArrayList<Libro> getAllLibros() {
 		ArrayList<Libro> resultado = new ArrayList<Libro>();
 		// Statement, PreparedStatement, ResultSet, MetaData
+		//String sql = "SELECT * FROM books where book_id=999"; //PARA PROBAR EL "NO HAY DATOS"
 		String sql = "SELECT * FROM books";
 		try {
-			conexion = conectar("localhost:3306", "shop", "root", "puerta");
+			conexion = conectar("localhost:3306", "tienda", "root", "elrincon");
 			Statement stmt = conexion.createStatement();
 			ResultSet rS = stmt.executeQuery(sql);
+			
+			if (!rS.first()) // no hay registros
+				return null;
 
 			while (rS.next()) {
 				Libro libro = new Libro();

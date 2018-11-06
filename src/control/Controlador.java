@@ -20,6 +20,7 @@ import utilidades.Conexion;
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String mensaje = "";
+	String rutaJSP = "";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -37,21 +38,33 @@ public class Controlador extends HttpServlet {
 			throws ServletException, IOException {
 
 		String opcion = request.getParameter("opcion");
-		String rutaJSP = "";
+		//String rutaJSP = "";
 		switch (opcion) {
 		case "1":
 			rutaJSP = "mensaje";
 			opcion1(request);
 			break;
 		case "2":
-			rutaJSP = "libros";
-			ArrayList<Libro> libros = Conexion.getAllLibros();
-			this.getServletContext().setAttribute("libros", libros);
+			//rutaJSP = "libros";
+			//ArrayList<Libro> libros = Conexion.getAllLibros();
+			//this.getServletContext().setAttribute("libros", libros);
+			rutaJSP = (opcion2(request)!=null)?"libros":"mensaje";
 			break;
 		default:
 			break;
 		}
 		request.getRequestDispatcher("jsp/" + rutaJSP + ".jsp").forward(request, response);
+	}
+	
+	public ArrayList<Libro> opcion2(HttpServletRequest request) {
+		ArrayList<Libro> libros = Conexion.getAllLibros();
+	     if (libros ==null) {
+	    	 //mensaje="No hay datos";
+	         request.setAttribute("mensaje", "No hay datos");
+	     }
+		request.setAttribute("libros", libros);
+		
+		return libros;		
 	}
 
 	public void opcion1(HttpServletRequest request) {
