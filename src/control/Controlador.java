@@ -2,6 +2,8 @@ package control;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import modelo.Libro;
 import utilidades.Conexion;
@@ -67,9 +71,28 @@ public class Controlador extends HttpServlet {
 		return libros;		
 	}
 
+	public void login(HttpServletRequest request) {
+		
+		System.out.println("entra cheLogin");
+		try {
+			Connection cnx = Conexion.conectar("localhost:3306", "tienda", "root", "elrincon");
+			PreparedStatement ps = (PreparedStatement) cnx.prepareStatement("SELECT * FROM usuarios WHERE usuario=? AND clave=?");
+			ps.setString(1, request.getParameter("usu"));
+			ps.setString(2, request.getParameter("con"));
+			ResultSet rs = ps.executeQuery();
+			if(rs.first()) {
+				rutaJSP = "AccesoCorrecto";
+			}else {
+				rutaJSP = "UsuarioIncorrecto";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
+	
 	public void opcion1(HttpServletRequest request) {
 
-		Connection cnx = Conexion.conectar("localhost:3306", "shop", "root", "puerta");
+		Connection cnx = Conexion.conectar("localhost:3306", "tienda", "root", "elrincon");
 		if (cnx == null)
 			mensaje = "Error de conexión...";
 		else
