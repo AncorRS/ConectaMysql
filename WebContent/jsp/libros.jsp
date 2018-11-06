@@ -35,7 +35,7 @@ con JSTL<br><br>
 		<form action="" method="post">
 			Libro: <input type="hidden" name="operacion" value="add" /> 
 			<select name="libro">
-				<c:forEach var="libro" items="${applicationScope.libros}">
+				<c:forEach var="libro" items="${requestScope.libros}">
 				  <option value="${libro.titulo }#${libro.precio}">${libro.titulo }</option>
 			
 				</c:forEach>

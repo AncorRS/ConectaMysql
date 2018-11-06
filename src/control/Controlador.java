@@ -54,6 +54,10 @@ public class Controlador extends HttpServlet {
 			//this.getServletContext().setAttribute("libros", libros);
 			rutaJSP = (opcion2(request)!=null)?"libros":"mensaje";
 			break;
+			
+		case "login":	
+			login(request);
+			
 		default:
 			break;
 		}
