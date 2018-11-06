@@ -52,7 +52,11 @@ con JSTL<br><br>
 			<input type="submit" value="Al carro" />
 		</form>
 
-	</fieldset>
+	</fieldset><br><br>
+	
+	<form action="index.jsp">
+ 		<button type="submit">REGRESAR</button><br><br><br>
+    </form>
 
 </body>
 </html>

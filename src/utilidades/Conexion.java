@@ -44,7 +44,7 @@ public class Conexion {
 			Statement stmt = conexion.createStatement();
 			ResultSet rS = stmt.executeQuery(sql);
 			
-			/*if (!rS.first()) // no hay registros
+			/*if (!rS.first()) // no hay registros  //ESTA LINEA NO NOS DEVUUELVE EL 1ER REGISTRO DEL RESULTSET
 				return null;*/
 
 			while (rS.next()) {
